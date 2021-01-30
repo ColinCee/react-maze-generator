@@ -15,5 +15,6 @@ module.exports = {
   plugins: ["react", "prettier", "flowtype"],
   rules: {
     "prettier/prettier": "warn",
+    "no-continue": "off",
   },
 };

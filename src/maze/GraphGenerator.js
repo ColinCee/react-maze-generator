@@ -1,10 +1,17 @@
 // @flow
 import Node from "./Node";
+import Dfs from "./Dfs";
 
 export default class GraphGenerator {
   nodes: Node[][] = [];
 
   generate(numRows: number, numCols: number): Node[][] {
+    this.initNodes(numRows, numCols);
+    Dfs(this.nodes[0][0]);
+    return this.nodes;
+  }
+
+  initNodes(numRows: number, numCols: number) {
     let counter = 0;
     for (let i = 1; i <= numRows; i += 1) {
       const row = [];
@@ -22,8 +29,6 @@ export default class GraphGenerator {
         node.addConnections(edgeAdjacentNodes);
       }
     }
-
-    return this.nodes;
   }
 
   getEdgeAdjacentNodes(

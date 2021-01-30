@@ -1,4 +1,5 @@
 // @flow
+import _ from "lodash";
 
 type Direction = "N" | "E" | "S" | "W";
 export default class Node {
@@ -6,12 +7,15 @@ export default class Node {
 
   connections: { N?: Node, E?: Node, S?: Node, W?: Node } = {};
 
+  walls: { N: boolean, E: boolean, S: boolean, W: boolean } = {
+    N: true,
+    E: true,
+    S: true,
+    W: true,
+  };
+
   constructor(id: number) {
     this.id = id;
-  }
-
-  addConnection(direction: Direction, connection: Node) {
-    this.connections[direction] = connection;
   }
 
   addConnections(connections: { N?: Node, E?: Node, S?: Node, W?: Node }) {
@@ -19,5 +23,22 @@ export default class Node {
       ...this.connections,
       ...connections,
     };
+  }
+
+  getDirecitonOfConnection(connection: Node): Direction {
+    const direction = Object.keys(this.connections).find((dir) =>
+      _.isEqual(this.connections[dir], connection)
+    );
+    console.log(direction);
+    if (!direction) {
+      throw new Error(`No connection between ${this.id} and ${connection.id}`);
+    }
+
+    return direction;
+  }
+
+  removeWall(connection: Node) {
+    const direction = this.getDirecitonOfConnection(connection);
+    this.walls[direction] = false;
   }
 }
