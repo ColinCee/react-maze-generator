@@ -2,7 +2,7 @@
 import React from "react";
 import type { Node } from "react";
 import "./App.css";
-import Grid from "./grid";
+import Grid from "./components/grid";
 
 const App = (): Node => (
   <div className="container">
