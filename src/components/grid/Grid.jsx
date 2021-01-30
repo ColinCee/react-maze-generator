@@ -10,7 +10,7 @@ export default (): Node => {
   const graphGenerator = new GraphGenerator();
   const graph = graphGenerator.generate(numRows, numRows);
   const cells = graph.flat().map((node) => <Cell key={node.id} node={node} />);
-  
+
   return (
     <div
       className="grid"
