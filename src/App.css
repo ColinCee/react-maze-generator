@@ -1,0 +1,17 @@
+.container {
+    display: flex;
+    justify-content: center;
+    margin-top: 5em;
+    
+}
+.grid { 
+  display: grid;
+  width: 50%;
+  border-left: 2px solid gray;
+  border-bottom: 2px solid gray;
+}
+
+.cell {
+    border-top: 2px solid gray;
+    border-right: 2px solid gray;
+}
