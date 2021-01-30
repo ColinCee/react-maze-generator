@@ -1,22 +1,14 @@
 // @flow
-import React from 'react'
-import type {Node} from "react"
-import './App.css';
+import React from "react";
+import type { Node } from "react";
+import "./App.css";
+import Grid from "./grid";
 
-const App = (): Node => {
-  const numRows = 4;
-  const cells = []
-  for (let i = 0; i < numRows**2; i+=1) { // rows
-     cells.push(i)
-  }
-  return <div className="container">
-    <div className="grid" style={{
-      "grid-template-columns": `repeat(${numRows}, 1fr)`,
-      "grid-template-rows": `repeat(${numRows}, 50px)`}}
-    >
-      {cells.map(cellNum => <div id={cellNum} className="cell" />)}
-    </div>
+const App = (): Node => (
+  <div className="container">
+    <h1>Maze Generator</h1>
+    <Grid />
   </div>
-}
+);
 
 export default App;
