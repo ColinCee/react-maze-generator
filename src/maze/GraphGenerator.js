@@ -26,27 +26,30 @@ export default class GraphGenerator {
     return this.nodes;
   }
 
-  getEdgeAdjacentNodes(rowNum: number, colNum: number): Node[] {
-    const edgeAdjacentNodes = [];
+  getEdgeAdjacentNodes(
+    rowNum: number,
+    colNum: number
+  ): { N?: Node, E?: Node, S?: Node, W?: Node } {
+    const edgeAdjacentNodes = {};
 
     // N
     if (rowNum > 0) {
-      edgeAdjacentNodes.push(this.nodes[rowNum - 1][colNum]);
+      edgeAdjacentNodes.N = this.nodes[rowNum - 1][colNum];
     }
 
     // S
     if (rowNum < this.nodes.length - 1) {
-      edgeAdjacentNodes.push(this.nodes[rowNum + 1][colNum]);
+      edgeAdjacentNodes.S = this.nodes[rowNum + 1][colNum];
     }
 
     // W
     if (colNum > 0) {
-      edgeAdjacentNodes.push(this.nodes[rowNum][colNum - 1]);
+      edgeAdjacentNodes.W = this.nodes[rowNum][colNum - 1];
     }
 
     // E
     if (colNum < this.nodes[colNum].length - 1) {
-      edgeAdjacentNodes.push(this.nodes[rowNum][colNum + 1]);
+      edgeAdjacentNodes.E = this.nodes[rowNum][colNum + 1];
     }
 
     return edgeAdjacentNodes;

@@ -2,7 +2,11 @@ import React from "react";
 import PropTypes from "prop-types";
 import Node from "../../maze/Node";
 
-const Cell = ({ node }): Node => {
+type Props = {
+  node: Node,
+};
+
+const Cell = ({ node }: Props) => {
   const style = {
     borderTop: "2px solid gray",
     borderRight: "2px solid gray",
@@ -10,7 +14,7 @@ const Cell = ({ node }): Node => {
 
   return (
     <div className="cell" style={style}>
-      {node.connections.length}
+      {Object.keys(node.connections).length}
     </div>
   );
 };

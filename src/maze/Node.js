@@ -1,20 +1,23 @@
 // @flow
+
+type Direction = "N" | "E" | "S" | "W";
 export default class Node {
   id: number;
 
-  connections: Node[] = [];
+  connections: { N?: Node, E?: Node, S?: Node, W?: Node } = {};
 
   constructor(id: number) {
     this.id = id;
   }
 
-  addConnection(connection: Node) {
-    this.connections.push(connection);
+  addConnection(direction: Direction, connection: Node) {
+    this.connections[direction] = connection;
   }
 
-  addConnections(connections: Node[]) {
-    connections.forEach((element) => {
-      this.addConnection(element);
-    });
+  addConnections(connections: { N?: Node, E?: Node, S?: Node, W?: Node }) {
+    this.connections = {
+      ...this.connections,
+      ...connections,
+    };
   }
 }
