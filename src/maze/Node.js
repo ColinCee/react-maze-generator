@@ -1,6 +1,4 @@
 // @flow
-import _ from "lodash";
-
 type Direction = "N" | "E" | "S" | "W";
 export default class Node {
   id: number;
@@ -26,10 +24,13 @@ export default class Node {
   }
 
   getDirecitonOfConnection(connection: Node): Direction {
-    const direction = Object.keys(this.connections).find((dir) =>
-      _.isEqual(this.connections[dir], connection)
-    );
-    console.log(direction);
+    const direction = Object.keys(this.connections).find((dir) => {
+      if (this.connections[dir]) {
+        return this.connections[dir].id === connection.id;
+      }
+
+      return false;
+    });
     if (!direction) {
       throw new Error(`No connection between ${this.id} and ${connection.id}`);
     }

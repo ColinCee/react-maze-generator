@@ -6,7 +6,7 @@ import GraphGenerator from "../../maze/GraphGenerator";
 import Cell from "./Cell";
 
 export default (): Node => {
-  const numRows = 4;
+  const numRows = 75;
   const graphGenerator = new GraphGenerator();
   const graph = graphGenerator.generate(numRows, numRows);
 
@@ -16,8 +16,8 @@ export default (): Node => {
     <div
       className="grid"
       style={{
-        gridTemplateColumns: `repeat(${numRows}, 1fr)`,
-        gridTemplateRows: `repeat(${numRows}, 50px)`,
+        gridTemplateColumns: `repeat(${numRows}, 10px)`,
+        gridTemplateRows: `repeat(${numRows}, 10px)`,
       }}
     >
       {cells}
