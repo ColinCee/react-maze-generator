@@ -1,6 +1,6 @@
 // @flow
 import Node from "../Node";
-import Dfs from "./Dfs";
+import Dfs from "./DfsGenerator";
 
 export default class GraphGenerator {
   nodes: Node[][] = [];

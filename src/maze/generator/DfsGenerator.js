@@ -1,7 +1,7 @@
 import _ from "lodash";
 import Node from "../Node";
 
-const Dfs = (start: Node) => {
+const DfsGenerator = (start: Node) => {
   const visitedNodes = new Set();
   const stack: Node[] = [];
 
@@ -27,4 +27,4 @@ const Dfs = (start: Node) => {
   }
 };
 
-export default Dfs;
+export default DfsGenerator;
