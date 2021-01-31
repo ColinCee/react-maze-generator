@@ -1,5 +1,8 @@
 // @flow
 type Direction = "N" | "E" | "S" | "W";
+// GRAY, WHITE, BLUE
+type Status = "VISITED" | "UNVISITED" | "QUEUED";
+
 export default class Node {
   id: number;
 
@@ -11,6 +14,11 @@ export default class Node {
     S: true,
     W: true,
   };
+
+  status: Status = "UNVISITED";
+
+  //
+  isCurrent: boolean = false;
 
   constructor(id: number) {
     this.id = id;
@@ -41,5 +49,13 @@ export default class Node {
   removeWall(connection: Node) {
     const direction = this.getDirecitonOfConnection(connection);
     this.walls[direction] = false;
+  }
+
+  setStatus(status: Status) {
+    this.status = status;
+  }
+
+  setIsCurrent(current: boolean) {
+    this.isCurrent = current;
   }
 }
