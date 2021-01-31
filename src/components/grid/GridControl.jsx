@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import Typography from "@material-ui/core/Typography";
 import Slider from "../input/Slider";
 import { MazeContext } from "../../store/MazeContext";
 
@@ -19,6 +20,9 @@ const GridControl = () => {
           dispatch({ type: "SET_NUM_ROWS", payload: value });
         }}
       />
+      <Typography variant="button">
+        Total Cells: {state.numRows ** 2}
+      </Typography>
     </div>
   );
 };
