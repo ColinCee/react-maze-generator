@@ -5,6 +5,8 @@ const MazeReducer = (state, action) => {
         return state;
       }
       return { ...state, numRows: action.payload };
+    case "SET_GRAPH":
+      return { ...state, graph: action.payload };
     default:
       return state;
   }
