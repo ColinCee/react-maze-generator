@@ -1,12 +1,14 @@
 // @flow
-import React from "react";
+import React, { useContext } from "react";
 import type { Node } from "react";
 import "./Grid.css";
-import GraphGenerator from "../../maze/GraphGenerator";
+import GraphGenerator from "../../maze/generator/GraphGenerator";
 import Cell from "./Cell";
+import { MazeContext } from "../../store/MazeContext";
 
-export default (): Node => {
-  const numRows = 75;
+const Grid = (): Node => {
+  const { state } = useContext(MazeContext);
+  const { numRows } = state;
   const graphGenerator = new GraphGenerator();
   const graph = graphGenerator.generate(numRows, numRows);
 
@@ -16,11 +18,13 @@ export default (): Node => {
     <div
       className="grid"
       style={{
-        gridTemplateColumns: `repeat(${numRows}, 10px)`,
-        gridTemplateRows: `repeat(${numRows}, 10px)`,
+        gridTemplateColumns: `repeat(${numRows}, 1fr)`,
+        gridAutoRows: "1fr",
       }}
     >
       {cells}
     </div>
   );
 };
+
+export default Grid;

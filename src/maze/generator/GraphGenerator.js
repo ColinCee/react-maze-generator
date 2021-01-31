@@ -1,5 +1,5 @@
 // @flow
-import Node from "./Node";
+import Node from "../Node";
 import Dfs from "./Dfs";
 
 export default class GraphGenerator {

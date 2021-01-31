@@ -1,5 +1,5 @@
 import _ from "lodash";
-import Node from "./Node";
+import Node from "../Node";
 
 const Dfs = (start: Node) => {
   const visitedNodes = new Set();
