@@ -1,6 +1,5 @@
 import React from "react";
-import PropTypes from "prop-types";
-import Node from "../../maze/Node";
+import type { Node } from "../../maze/Node";
 
 type Props = {
   node: Node,
@@ -43,10 +42,6 @@ const Cell = ({ node }: Props) => {
     ...generateBackgroundStyle(node),
   };
   return <div className="cell" style={style} />;
-};
-
-Cell.propTypes = {
-  node: PropTypes.instanceOf(Node).isRequired,
 };
 
 export default Cell;

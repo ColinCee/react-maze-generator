@@ -1,5 +1,6 @@
 import _ from "lodash";
-import Node from "../Node";
+import { removeWallBetween } from "../Node";
+import type Node from "../Node";
 
 const DfsGenerator = (start: Node) => {
   const visitedNodes = new Set();
@@ -20,8 +21,7 @@ const DfsGenerator = (start: Node) => {
       unvisitedNeighbours[_.random(0, unvisitedNeighbours.length - 1)];
     stack.push(current);
 
-    current.removeWall(neighbour);
-    neighbour.removeWall(current);
+    removeWallBetween(current, neighbour);
     visitedNodes.add(neighbour);
     stack.push(neighbour);
   }

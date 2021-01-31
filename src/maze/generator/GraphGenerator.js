@@ -1,5 +1,6 @@
 // @flow
-import Node from "../Node";
+import type { Node } from "../Node";
+import { createNode } from "../Node";
 import Dfs from "./DfsGenerator";
 
 export default class GraphGenerator {
@@ -16,7 +17,7 @@ export default class GraphGenerator {
     for (let i = 1; i <= numRows; i += 1) {
       const row = [];
       for (let j = 1; j <= numCols; j += 1) {
-        row.push(new Node((counter += 1)));
+        row.push(createNode((counter += 1)));
       }
 
       this.nodes.push(row);
@@ -25,8 +26,7 @@ export default class GraphGenerator {
     for (let i = 0; i < numRows; i += 1) {
       for (let j = 0; j < numCols; j += 1) {
         const node = this.nodes[i][j];
-        const edgeAdjacentNodes = this.getEdgeAdjacentNodes(i, j);
-        node.addConnections(edgeAdjacentNodes);
+        node.connections = this.getEdgeAdjacentNodes(i, j);
       }
     }
   }
