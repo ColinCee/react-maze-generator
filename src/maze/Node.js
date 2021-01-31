@@ -2,7 +2,6 @@
 type Direction = "N" | "E" | "S" | "W";
 // GRAY, WHITE, BLUE
 type Status = "VISITED" | "UNVISITED" | "QUEUED";
-
 export type Node = {
   id: number,
 
@@ -37,6 +36,19 @@ export const getRelativeDirection = (origin: Node, target: Node): Direction => {
   }
 
   return direction;
+};
+
+export const getVisibleConnections = (
+  node: Node
+): { N?: Node, E?: Node, S?: Node, W?: Node } => {
+  const connections = {};
+  Object.keys(node.walls)
+    .filter((key) => !node.walls[key])
+    .forEach((key) => {
+      connections[key] = node.connections[key];
+    });
+
+  return connections;
 };
 
 /* eslint-disable no-param-reassign */
