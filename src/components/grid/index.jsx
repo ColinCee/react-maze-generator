@@ -1,3 +1,4 @@
 import Grid from "./Grid";
+import GridControl from "./GridControl";
 
-export default Grid;
+export { Grid, GridControl };
