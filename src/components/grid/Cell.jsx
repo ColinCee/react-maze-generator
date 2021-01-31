@@ -34,14 +34,32 @@ const generateBackgroundStyle = (node: Node) => {
   if (node.status === "QUEUED") {
     style.backgroundColor = "#1976d2";
   }
+
+  return style;
 };
 
 const Cell = ({ node }: Props) => {
   const style = {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
     ...generateWallStyles(node),
     ...generateBackgroundStyle(node),
   };
-  return <div className="cell" style={style} />;
+  return (
+    <div className="cell" style={style}>
+      {node.isCurrent && (
+        <div
+          style={{
+            width: "25%",
+            height: "25%",
+            borderRadius: "50%",
+            backgroundColor: "#ffc107",
+          }}
+        />
+      )}
+    </div>
+  );
 };
 
 export default Cell;

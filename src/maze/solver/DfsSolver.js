@@ -32,7 +32,7 @@ const DfsSolver = async (
       })
     );
 
-    await timer(250);
+    await timer(100);
 
     // Found path
     if (current.id === finish.id) {
