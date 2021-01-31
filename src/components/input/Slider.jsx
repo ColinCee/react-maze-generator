@@ -6,7 +6,7 @@ import Slider from "@material-ui/core/Slider";
 import { makeStyles } from "@material-ui/core/styles";
 
 type Props = {
-  defaultValue: number,
+  value: number,
   label: string,
   onChange: Function,
 };
@@ -15,7 +15,7 @@ const useStyles = makeStyles({
   root: { display: "flex", flexDirection: "row", width: "15em" },
   typography: { marginRight: "1em" },
 });
-const CustomSlider = ({ defaultValue, label, onChange }: Props): Node => {
+const CustomSlider = ({ value, label, onChange }: Props): Node => {
   const { root, typography } = useStyles();
   return (
     <div className={root}>
@@ -23,7 +23,7 @@ const CustomSlider = ({ defaultValue, label, onChange }: Props): Node => {
         {label}
       </Typography>
       <Slider
-        defaultValue={defaultValue}
+        value={value}
         aria-labelledby="discrete-slider-custom"
         valueLabelDisplay="auto"
         onChange={onChange}
