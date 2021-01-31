@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from "react";
 import GraphGenerator from "../../../maze/generator/GraphGenerator";
 import { MazeContext } from "../../../store/MazeContext";
 import GridSize from "./GridSize";
+import SolverButton from "./SolverButton";
 
 const GridControl = () => {
   const { state, dispatch } = useContext(MazeContext);
@@ -16,6 +17,7 @@ const GridControl = () => {
   return (
     <>
       <GridSize />
+      <SolverButton />
     </>
   );
 };

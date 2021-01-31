@@ -50,12 +50,4 @@ export default class Node {
     const direction = this.getDirecitonOfConnection(connection);
     this.walls[direction] = false;
   }
-
-  setStatus(status: Status) {
-    this.status = status;
-  }
-
-  setIsCurrent(current: boolean) {
-    this.isCurrent = current;
-  }
 }

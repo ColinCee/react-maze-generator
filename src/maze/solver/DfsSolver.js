@@ -1,7 +1,12 @@
 // @flow
 import Node from "../Node";
 
-const DfsSolver = (graph: Node[][], start: Node, finish: Node) => {
+const DfsSolver = (
+  graph: Node[][],
+  dispatch: Function,
+  start: Node,
+  finish: Node
+) => {
   const visitedNodes = new Set();
   const stack: Node[][] = [];
 
@@ -14,9 +19,11 @@ const DfsSolver = (graph: Node[][], start: Node, finish: Node) => {
     graph
       .flat()
       .filter((node) => node.id === current.id)
-      .forEach((node) => node.setIsCurrent(false));
+      .forEach((node) =>
+        dispatch({ type: "UPDATE_NODE", payload: { ...node, current: false } })
+      );
 
-    current.setIsCurrent(true);
+    dispatch({ type: "UPDATE_NODE", payload: { ...current, current: true } });
 
     // Found path
     if (current.id === finish.id) {
@@ -27,12 +34,18 @@ const DfsSolver = (graph: Node[][], start: Node, finish: Node) => {
     neighbours.forEach((neighbour) => {
       if (!visitedNodes.has(neighbour)) {
         stack.push([...path, neighbour]);
-        neighbour.setStatus("QUEUED");
+        dispatch({
+          type: "UPDATE_NODE",
+          payload: { ...neighbour, status: "QUEUED" },
+        });
       }
     });
 
     visitedNodes.add(current);
-    current.setStatus("VISITED");
+    dispatch({
+      type: "UPDATE_NODE",
+      payload: { ...current, status: "QUEUED" },
+    });
   }
 };
 
