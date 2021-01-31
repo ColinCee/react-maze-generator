@@ -6,7 +6,7 @@ type Props = {
   node: Node,
 };
 
-const generateStyle = (node: Node) => {
+const generateWallStyles = (node: Node) => {
   const style = {};
   if (node.walls.N) {
     style.borderTop = "2px solid gray";
@@ -23,12 +23,27 @@ const generateStyle = (node: Node) => {
   if (!node.connections.S) {
     style.borderBottom = "2px solid gray";
   }
-
   return style;
 };
-const Cell = ({ node }: Props) => (
-  <div className="cell" style={generateStyle(node)} />
-);
+
+const generateBackgroundStyle = (node: Node) => {
+  const style = {};
+  if (node.status === "VISITED") {
+    style.backgroundColor = "#616161";
+  }
+
+  if (node.status === "QUEUED") {
+    style.backgroundColor = "#1976d2";
+  }
+};
+
+const Cell = ({ node }: Props) => {
+  const style = {
+    ...generateWallStyles(node),
+    ...generateBackgroundStyle(node),
+  };
+  return <div className="cell" style={style} />;
+};
 
 Cell.propTypes = {
   node: PropTypes.instanceOf(Node).isRequired,
