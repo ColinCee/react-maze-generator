@@ -1,4 +1,4 @@
 import Grid from "./Grid";
-import GridControl from "./GridControl";
+import GridControl from "./control/GridControl";
 
 export { Grid, GridControl };

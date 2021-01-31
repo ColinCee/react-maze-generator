@@ -1,9 +1,9 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
-import Slider from "../input/Slider";
-import { MazeContext } from "../../store/MazeContext";
-import GraphGenerator from "../../maze/generator/GraphGenerator";
+import Slider from "../../input/Slider";
+import { MazeContext } from "../../../store/MazeContext";
+import GraphGenerator from "../../../maze/generator/GraphGenerator";
 
 const useStyles = makeStyles({
   root: { marginTop: "5em", marginBottom: "2em" },
@@ -12,12 +12,6 @@ const useStyles = makeStyles({
 const GridControl = () => {
   const { state, dispatch } = useContext(MazeContext);
 
-  useEffect(() => {
-    const graphGenerator = new GraphGenerator();
-    const graph = graphGenerator.generate(state.numRows, state.numRows);
-
-    dispatch({ type: "SET_GRAPH", payload: graph });
-  }, []);
   const { root } = useStyles();
   return (
     <div className={root}>
