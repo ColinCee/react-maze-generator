@@ -7,12 +7,20 @@ const useStyles = makeStyles({
   root: { marginTop: "5em", marginBottom: "2em" },
 });
 
-export default () => {
-  const { numRows } = useContext(MazeContext);
+const GridControl = () => {
+  const { state, dispatch } = useContext(MazeContext);
   const { root } = useStyles();
   return (
     <div className={root}>
-      <Slider defaultValue={numRows} label="Size" />
+      <Slider
+        value={state.numRows}
+        label="Size"
+        onChange={(e, value) => {
+          dispatch({ type: "SET_NUM_ROWS", payload: value });
+        }}
+      />
     </div>
   );
 };
+
+export default GridControl;

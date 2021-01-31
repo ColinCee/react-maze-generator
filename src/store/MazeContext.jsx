@@ -1,15 +1,19 @@
-// @flow
-import React from "react";
-import type { Context, Node } from "react";
+import React, { useReducer } from "react";
+import MazeReducer from "./MazeReducer";
 
-export type State = { numRows: number };
-const initialState: State = { numRows: 4 };
-const MazeContext: Context<State> = React.createContext(initialState);
+const initialState = { numRows: 4 };
+const MazeContext = React.createContext({ initialState });
 
 type Props = {
   children: Node,
 };
-const MazeProvider = ({ children }: Props): Node => (
-  <MazeContext.Provider value={initialState}>{children}</MazeContext.Provider>
-);
+const MazeProvider = ({ children }: Props): Node => {
+  const [state, dispatch] = useReducer(MazeReducer, initialState);
+
+  return (
+    <MazeContext.Provider value={{ state, dispatch }}>
+      {children}
+    </MazeContext.Provider>
+  );
+};
 export { MazeContext, MazeProvider };

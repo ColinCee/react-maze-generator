@@ -2,12 +2,13 @@
 import React, { useContext } from "react";
 import type { Node } from "react";
 import "./Grid.css";
-import GraphGenerator from "../../maze/GraphGenerator";
+import GraphGenerator from "../../maze/generator/GraphGenerator";
 import Cell from "./Cell";
 import { MazeContext } from "../../store/MazeContext";
 
-export default (): Node => {
-  const { numRows } = useContext(MazeContext);
+const Grid = (): Node => {
+  const { state } = useContext(MazeContext);
+  const { numRows } = state;
   const graphGenerator = new GraphGenerator();
   const graph = graphGenerator.generate(numRows, numRows);
 
@@ -25,3 +26,5 @@ export default (): Node => {
     </div>
   );
 };
+
+export default Grid;
