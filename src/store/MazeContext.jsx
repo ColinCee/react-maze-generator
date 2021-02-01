@@ -1,7 +1,7 @@
 import React, { useReducer } from "react";
 import MazeReducer from "./MazeReducer";
 
-const initialState = { numRows: 4 };
+const initialState = { numRows: 4, graph: [] };
 const MazeContext = React.createContext({ initialState });
 
 type Props = {

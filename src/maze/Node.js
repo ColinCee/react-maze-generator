@@ -1,45 +1,60 @@
 // @flow
 type Direction = "N" | "E" | "S" | "W";
-export default class Node {
-  id: number;
+// GRAY, WHITE, BLUE
+type Status = "VISITED" | "UNVISITED" | "QUEUED";
+export type Node = {
+  id: number,
 
-  connections: { N?: Node, E?: Node, S?: Node, W?: Node } = {};
+  connections: { N?: Node, E?: Node, S?: Node, W?: Node },
 
-  walls: { N: boolean, E: boolean, S: boolean, W: boolean } = {
-    N: true,
-    E: true,
-    S: true,
-    W: true,
-  };
+  walls: { N: boolean, E: boolean, S: boolean, W: boolean },
 
-  constructor(id: number) {
-    this.id = id;
-  }
+  status: Status,
 
-  addConnections(connections: { N?: Node, E?: Node, S?: Node, W?: Node }) {
-    this.connections = {
-      ...this.connections,
-      ...connections,
-    };
-  }
+  isCurrent: boolean,
+};
 
-  getDirecitonOfConnection(connection: Node): Direction {
-    const direction = Object.keys(this.connections).find((dir) => {
-      if (this.connections[dir]) {
-        return this.connections[dir].id === connection.id;
-      }
+export const createNode = (id: number): Node => ({
+  id,
+  connections: {},
+  walls: { N: true, E: true, S: true, W: true },
+  status: "UNVISITED",
+  isCurrent: false,
+});
 
-      return false;
-    });
-    if (!direction) {
-      throw new Error(`No connection between ${this.id} and ${connection.id}`);
+export const getRelativeDirection = (origin: Node, target: Node): Direction => {
+  const direction = Object.keys(origin.connections).find((dir) => {
+    if (origin.connections[dir]) {
+      return origin.connections[dir].id === target.id;
     }
 
-    return direction;
+    return false;
+  });
+
+  if (!direction) {
+    throw new Error(`No connection between ${origin.id} and ${target.id}`);
   }
 
-  removeWall(connection: Node) {
-    const direction = this.getDirecitonOfConnection(connection);
-    this.walls[direction] = false;
-  }
-}
+  return direction;
+};
+
+export const getVisibleConnections = (
+  node: Node
+): { N?: Node, E?: Node, S?: Node, W?: Node } => {
+  const connections = {};
+  Object.keys(node.walls)
+    .filter((key) => !node.walls[key])
+    .forEach((key) => {
+      connections[key] = node.connections[key];
+    });
+
+  return connections;
+};
+
+/* eslint-disable no-param-reassign */
+export const removeWallBetween = (a: Node, b: Node) => {
+  let dir = getRelativeDirection(a, b);
+  a.walls[dir] = false;
+  dir = getRelativeDirection(b, a);
+  b.walls[dir] = false;
+};

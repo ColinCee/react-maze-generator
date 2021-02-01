@@ -1,12 +1,11 @@
 import React from "react";
-import PropTypes from "prop-types";
-import Node from "../../maze/Node";
+import type { Node } from "../../maze/Node";
 
 type Props = {
   node: Node,
 };
 
-const generateStyle = (node: Node) => {
+const generateWallStyles = (node: Node) => {
   const style = {};
   if (node.walls.N) {
     style.borderTop = "2px solid gray";
@@ -23,15 +22,44 @@ const generateStyle = (node: Node) => {
   if (!node.connections.S) {
     style.borderBottom = "2px solid gray";
   }
+  return style;
+};
+
+const generateBackgroundStyle = (node: Node) => {
+  const style = {};
+  if (node.status === "VISITED") {
+    style.backgroundColor = "#616161";
+  }
+
+  if (node.status === "QUEUED") {
+    style.backgroundColor = "#1976d2";
+  }
 
   return style;
 };
-const Cell = ({ node }: Props) => (
-  <div className="cell" style={generateStyle(node)} />
-);
 
-Cell.propTypes = {
-  node: PropTypes.instanceOf(Node).isRequired,
+const Cell = ({ node }: Props) => {
+  const style = {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    ...generateWallStyles(node),
+    ...generateBackgroundStyle(node),
+  };
+  return (
+    <div className="cell" style={style}>
+      {node.isCurrent && (
+        <div
+          style={{
+            width: "25%",
+            height: "25%",
+            borderRadius: "50%",
+            backgroundColor: "#ffc107",
+          }}
+        />
+      )}
+    </div>
+  );
 };
 
 export default Cell;
